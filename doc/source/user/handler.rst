@@ -23,7 +23,7 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+
 | 0x0280 | 0x02FF |    9 | :ref:`Extended Matrix`                                                        |
 +--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0281          |      | :doc:`Colorduino_GFX </handler/ArduRPC_Colorduino_GFX/doc/index>`             |
+| 0x0281          |      | :ref:`Colorduino_GFX`                                                         |
 +--------+--------+------+-------------------------------------------------------------------------------+
 | 0xFF00 | 0xFFFF |    8 | :ref:`Custom handlers`                                                        |
 +--------+--------+------+-------------------------------------------------------------------------------+
@@ -264,6 +264,34 @@ But it might also be possible to wrap any other library.
 .. cpp:function:: void matrix_gfx::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t color1, uint8_t color2, uint8_t color3)
 
     Draw a Bitmap.
+
+
+.. _Colorduino_GFX:
+
+Colorduino_GFX
+~~~~~~~~~~~~~~
+
+This handler extends :ref:`Extended Matrix`.
+
++------+---------------------------------+
+| ID   | Function                        |
++======+=================================+
+| 0xA0 | :cpp:func:`swapBuffers`         |
++------+---------------------------------+
+| 0xA1 | :cpp:func:`setAutoSwapBuffers`  |
++------+---------------------------------+
+
+.. cpp:function:: uint8_t swapBuffers(uint8_t copy)
+
+    :param copy: 0 = False | 1 = True
+
+    Swap buffers and copy new front buffer into the back buffer.
+
+.. cpp:function:: uint8_t setAutoSwapBuffers(uint8_t auto_swap)
+
+    :param auto_swap: 0 = False | 1 = True
+
+    Set option to swap buffers after each command.
 
 
 .. _Custom handlers:

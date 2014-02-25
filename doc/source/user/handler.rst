@@ -8,25 +8,34 @@ Handler types
 
 A handler type belongs always to a group with a base type. Functions defined in the base type must be available in all subtypes. This ensures that a client with support for a base type can at least access the basic functionality of a handler even if that specific subtype isn't supported.
 
+The development process of an API can be classified by three states:
+
+Experimental:
+    Currently under development and the API might be changed in the next release.
+Beta:
+    The API should be changed only if there is a good reason for this.
+Stable:
+    The existing API must not be changed.
+
 To register a new handler type feel free to open a new request by using the `issue tracker <https://github.com/DinoTools/ardurpc/issues>`_ on github.
 
-+--------+--------+------+-------------------------------------------------------------------------------+
-| Start  | End    | Mask | Name                                                                          |
-+========+========+======+===============================================================================+
-| 0x0100 | 0x01FF |    8 | :ref:`Base Pixel Strip`                                                       |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0180 | 0x01FF |    9 | :ref:`Extended Pixel Strip`                                                   |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0181          |      | :doc:`Adafruit_NeoPixel </handler/ArduRPC_Adafruit_NeoPixel/doc/index>`       |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0200 | 0x02FF |    8 | :ref:`Base Matrix`                                                            |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0280 | 0x02FF |    9 | :ref:`Extended Matrix`                                                        |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0x0281          |      | :ref:`Colorduino_GFX`                                                         |
-+--------+--------+------+-------------------------------------------------------------------------------+
-| 0xFF00 | 0xFFFF |    8 | :ref:`Custom handlers`                                                        |
-+--------+--------+------+-------------------------------------------------------------------------------+
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| Start  | End    | Mask | Name                                                                          | Status       |
++========+========+======+===============================================================================+==============+
+| 0x0100 | 0x01FF |    8 | :ref:`Base Pixel Strip`                                                       | Beta         |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0180 | 0x01FF |    9 | :ref:`Extended Pixel Strip`                                                   | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0181          |      | :doc:`Adafruit_NeoPixel </handler/ArduRPC_Adafruit_NeoPixel/doc/index>`       | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0200 | 0x02FF |    8 | :ref:`Base Matrix`                                                            | Beta         |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0280 | 0x02FF |    9 | :ref:`Extended Matrix`                                                        | Beta         |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0281          |      | :ref:`Colorduino_GFX`                                                         | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0xFF00 | 0xFFFF |    8 | :ref:`Custom handlers`                                                        | n/a          |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
 
 Base types
 ----------

@@ -128,6 +128,24 @@ char ArduRPC::getParam_char()
 }
 
 /**
+ * Read a float value at the current position in the parameter data and return it.
+ *
+ * @return A float value.
+ */
+float ArduRPC::getParam_float()
+{
+  float result;
+  uint8_t *v = (uint8_t *)&result;
+
+  v[3] = this->getParam_uint8();
+  v[2] = this->getParam_uint8();
+  v[1] = this->getParam_uint8();
+  v[0] = this->getParam_uint8();
+
+  return result;
+}
+
+/**
  * Read a byte from the current position in the parameter data and return it.
  */
 int8_t ArduRPC::getParam_int8()
@@ -404,6 +422,20 @@ bool ArduRPC::writeResult(char *string, uint8_t length)
 {
   memcpy(&this->result.data[this->result.length + 1], string, RPC_MAX_NAME_LENGTH);
   this->result.length = this->result.length + length;
+}
+
+/**
+ * Write a value of type FLOAT
+ * @param value The value to write.
+ */
+bool ArduRPC::writeResult_float(float value)
+{
+  uint8_t *v = (uint8_t *)&value;
+  this->writeResult(RPC_FLOAT);
+  this->writeResult(v[3]);
+  this->writeResult(v[2]);
+  this->writeResult(v[1]);
+  this->writeResult(v[0]);
 }
 
 /**

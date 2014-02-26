@@ -80,6 +80,8 @@
 //! Datatype identifier
 #define RPC_UINT64 0x08
 //! Datatype identifier
+#define RPC_FLOAT 0x09
+//! Datatype identifier
 #define RPC_ARRAY 0x10
 //! Datatype identifier
 #define RPC_STRING 0x11
@@ -168,6 +170,7 @@ class ArduRPC
       writeData(uint8_t c),
       writeResult(uint8_t c),
       writeResult(char *string, uint8_t length),
+      writeResult_float(float value),
       writeResult_int8(int8_t value),
       writeResult_int16(int16_t value),
       writeResult_string(char *string, uint8_t length),
@@ -190,6 +193,8 @@ class ArduRPC
     // get params
     char
       getParam_char();
+    float
+      getParam_float();
     int8_t
       getParam_int8();
     int16_t

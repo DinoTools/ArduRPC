@@ -86,6 +86,8 @@ Basic data types have a fixed length like a signet Integer.
 +------------+--------------------+---------------+
 | 0x08       | Unsigned Long Long | 8             |
 +------------+--------------------+---------------+
+| 0x09       | Float [#float]_    | 4             |
++------------+--------------------+---------------+
 
 
 **Data structure:**
@@ -239,3 +241,7 @@ Basic data types
 +------+----------------------------------------+
 | 0x10 | Value: 16                              |
 +------+----------------------------------------+
+
+.. rubric:: Footnotes
+
+.. [#float] Float values MUST use the IEEE 754 binary32 representation format.

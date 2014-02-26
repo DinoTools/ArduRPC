@@ -34,6 +34,14 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0281          |      | :ref:`Colorduino_GFX`                                                         | Experimental |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0400 | 0x04FF |    8 | :ref:`Base Sensor`                                                            | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0401          |      | :ref:`Temperature Sensor <Temperature Sensor>`                                | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0402          |      | :ref:`Humidity Sensor <Temperature Sensor>`                                   | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0403          |      | :ref:`Temperature-Humidity Sensor`                                            | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0xFF00 | 0xFFFF |    8 | :ref:`Custom handlers`                                                        | n/a          |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 
@@ -302,6 +310,103 @@ This handler extends :ref:`Extended Matrix`.
 
     Set option to swap buffers after each command.
 
+.. _Base Sensor:
+
+Base Sensor
+~~~~~~~~~~~
+
+.. _Temperature Sensor:
+
+Temperature/Humidity Sensor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Temperature and the Humidity Sensors share the same API. Temperatures are always in Celsius.
+
++------+----------------------------------------------+
+| ID   | Function                                     |
++======+==============================================+
+| 0x11 | :cpp:func:`sensor_temperature::getMinValue`  |
++------+----------------------------------------------+
+| 0x12 | :cpp:func:`sensor_temperature::getMaxValue`  |
++------+----------------------------------------------+
+| 0x13 | :cpp:func:`sensor_temperature::getAccuracy`  |
++------+----------------------------------------------+
+| 0x14 | :cpp:func:`sensor_temperature::getValue`     |
++------+----------------------------------------------+
+
+.. cpp:function:: float sensor_temperature::getMinValue()
+
+    Get the value of the lowest possible temperature/humidity measured by the sensor.
+
+.. cpp:function:: float sensor_temperature::getMaxValue()
+
+    Get the value of the highest possible temperature/humidity measured by the sensor.
+
+.. cpp:function:: float sensor_temperature::getAccuracy()
+
+    Get the best accuracy of the measured values.
+
+.. cpp:function:: float sensor_temperature::getValue()
+
+    Get the current temperature/humidity.
+
+
+.. _Temperature-Humidity Sensor:
+
+Temperature-Humidity Sensor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++------+------------------------------------------------------+
+| ID   | Function                                             |
++======+======================================================+
+| 0x11 | :cpp:func:`sensor_temp_humidity::getMinTempValue`    |
++------+------------------------------------------------------+
+| 0x12 | :cpp:func:`sensor_temp_humidity::getMaxTempValue`    |
++------+------------------------------------------------------+
+| 0x13 | :cpp:func:`sensor_temp_humidity::getTempAccuracy`    |
++------+------------------------------------------------------+
+| 0x14 | :cpp:func:`sensor_temp_humidity::getTemperature`     |
++------+------------------------------------------------------+
+| 0x21 | :cpp:func:`sensor_temp_humidity::getMinHumidityValue`|
++------+------------------------------------------------------+
+| 0x22 | :cpp:func:`sensor_temp_humidity::getMaxHumidityValue`|
++------+------------------------------------------------------+
+| 0x23 | :cpp:func:`sensor_temp_humidity::getHumidityAccuracy`|
++------+------------------------------------------------------+
+| 0x24 | :cpp:func:`sensor_temp_humidity::getHumidity`        |
++------+------------------------------------------------------+
+
+.. cpp:function:: float sensor_temp_humidity::getMinTempValue()
+
+    Get the value of the lowest possible temperature measured by the sensor.
+
+.. cpp:function:: float sensor_temp_humidity::getMaxTempValue()
+
+    Get the value of the highest possible temperature measured by the sensor.
+
+.. cpp:function:: float sensor_temp_humidity::getTempAccuracy()
+
+    Get the best accuracy of the measured temperature.
+
+.. cpp:function:: float sensor_temp_humidity::getTemperature()
+
+    Get the current temperature.
+
+.. cpp:function:: float sensor_temp_humidity::getMinHumidityValue()
+
+    Get the value of the lowest possible humidity measured by the sensor.
+
+.. cpp:function:: float sensor_temp_humidity::getMaxHumidityValue()
+
+    Get the value of the highest possible humidity measured by the sensor.
+
+.. cpp:function:: float sensor_temp_humidity::getHumidityAccuracy()
+
+    Get the best accuracy of the measured humidity.
+
+.. cpp:function:: float sensor_temp_humidity::getHumidity()
+
+    Get the current humidity.
 
 .. _Custom handlers:
 

@@ -32,7 +32,7 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0280 | 0x02FF |    9 | :ref:`Extended Matrix`                                                        | Beta         |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
-| 0x0281          |      | :ref:`Colorduino_GFX`                                                         | Experimental |
+| 0x0281          |      | Colorduino_GFX                                                                | Deprecated   |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0400 | 0x04FF |    8 | :ref:`Base Sensor`                                                            | Experimental |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
@@ -111,63 +111,67 @@ Base/Extended Matrix
 The Base Matrix handler is inspired by the Adafruit_GFX library and it is intended to be used with libraries based on Adafruit_GFX.
 But it might also be possible to wrap any other library.
 
-+------+-----------------------------------------+-----------------+
-| ID   | Function                                | Matrix Type     |
-+------+-----------------------------------------+------+----------+
-|      |                                         | Base | Extended |
-+======+=========================================+======+==========+
-| 0x01 | :cpp:func:`matrix_gfx::getColorCount`   | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x02 | :cpp:func:`matrix_gfx::getWidth`        | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x03 | :cpp:func:`matrix_gfx::getHeight`       | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x10 | :cpp:func:`matrix_gfx::drawPixel`       | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x20 | :cpp:func:`matrix_gfx::drawLine`        | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x21 | :cpp:func:`matrix_gfx::drawFastVLine`   |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x22 | :cpp:func:`matrix_gfx::drawFastHLine`   |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x23 | :cpp:func:`matrix_gfx::drawRect`        |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x24 | :cpp:func:`matrix_gfx::fillRect`        |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x25 | :cpp:func:`matrix_gfx::fillScreen`      | X    | X        |
-+------+-----------------------------------------+------+----------+
-| 0x26 | :cpp:func:`matrix_gfx::invertDisplay`   |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x30 | :cpp:func:`matrix_gfx::drawCircle`      |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x31 | :cpp:func:`matrix_gfx::fillCircle`      |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x32 | :cpp:func:`matrix_gfx::drawTriangle`    |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x33 | :cpp:func:`matrix_gfx::fillTriangle`    |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x34 | :cpp:func:`matrix_gfx::drawRoundRect`   |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x35 | :cpp:func:`matrix_gfx::fillRoundRect`   |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x40 | :cpp:func:`matrix_gfx::drawChar`        |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x41 | :cpp:func:`matrix_gfx::setCursor`       |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x42 | :cpp:func:`matrix_gfx::setTextColor`    |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x43 | :cpp:func:`matrix_gfx::setTextColor`    |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x44 | :cpp:func:`matrix_gfx::setTextSize`     |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x45 | :cpp:func:`matrix_gfx::setTextWrap`     |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x46 | :cpp:func:`matrix_gfx::write`           |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x50 | :cpp:func:`matrix_gfx::setRotation`     |      | X        |
-+------+-----------------------------------------+------+----------+
-| 0x51 | :cpp:func:`matrix_gfx::drawBitmap`      |      | X        |
-+------+-----------------------------------------+------+----------+
++------+--------------------------------------------+-----------------+
+| ID   | Function                                   | Matrix Type     |
++------+--------------------------------------------+------+----------+
+|      |                                            | Base | Extended |
++======+============================================+======+==========+
+| 0x01 | :cpp:func:`matrix_gfx::getColorCount`      | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x02 | :cpp:func:`matrix_gfx::getWidth`           | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x03 | :cpp:func:`matrix_gfx::getHeight`          | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x10 | :cpp:func:`matrix_gfx::drawPixel`          | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x20 | :cpp:func:`matrix_gfx::drawLine`           | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x21 | :cpp:func:`matrix_gfx::drawFastVLine`      |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x22 | :cpp:func:`matrix_gfx::drawFastHLine`      |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x23 | :cpp:func:`matrix_gfx::drawRect`           |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x24 | :cpp:func:`matrix_gfx::fillRect`           |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x25 | :cpp:func:`matrix_gfx::fillScreen`         | X    | X        |
++------+--------------------------------------------+------+----------+
+| 0x26 | :cpp:func:`matrix_gfx::invertDisplay`      |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x30 | :cpp:func:`matrix_gfx::drawCircle`         |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x31 | :cpp:func:`matrix_gfx::fillCircle`         |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x32 | :cpp:func:`matrix_gfx::drawTriangle`       |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x33 | :cpp:func:`matrix_gfx::fillTriangle`       |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x34 | :cpp:func:`matrix_gfx::drawRoundRect`      |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x35 | :cpp:func:`matrix_gfx::fillRoundRect`      |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x40 | :cpp:func:`matrix_gfx::drawChar`           |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x41 | :cpp:func:`matrix_gfx::setCursor`          |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x42 | :cpp:func:`matrix_gfx::setTextColor`       |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x43 | :cpp:func:`matrix_gfx::setTextColor`       |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x44 | :cpp:func:`matrix_gfx::setTextSize`        |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x45 | :cpp:func:`matrix_gfx::setTextWrap`        |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x46 | :cpp:func:`matrix_gfx::write`              |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x50 | :cpp:func:`matrix_gfx::setRotation`        |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x51 | :cpp:func:`matrix_gfx::swapBuffers`        |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x52 | :cpp:func:`matrix_gfx::setAutoSwapBuffers` |      | X        |
++------+--------------------------------------------+------+----------+
+| 0x60 | :cpp:func:`matrix_gfx::drawBitmap`         |      | X        |
++------+--------------------------------------------+------+----------+
 
 
 .. cpp:function:: uint8_t matrix_gfx::getColorCount()
@@ -278,37 +282,22 @@ But it might also be possible to wrap any other library.
 
     Set the rotation.
 
-.. cpp:function:: void matrix_gfx::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t color1, uint8_t color2, uint8_t color3)
-
-    Draw a Bitmap.
-
-
-.. _Colorduino_GFX:
-
-Colorduino_GFX
-~~~~~~~~~~~~~~
-
-This handler extends :ref:`Extended Matrix`.
-
-+------+---------------------------------+
-| ID   | Function                        |
-+======+=================================+
-| 0xA0 | :cpp:func:`swapBuffers`         |
-+------+---------------------------------+
-| 0xA1 | :cpp:func:`setAutoSwapBuffers`  |
-+------+---------------------------------+
-
-.. cpp:function:: uint8_t swapBuffers(uint8_t copy)
+.. cpp:function:: uint8_t matrix_gfx::swapBuffers(uint8_t copy)
 
     :param copy: 0 = False | 1 = True
 
     Swap buffers and copy new front buffer into the back buffer.
 
-.. cpp:function:: uint8_t setAutoSwapBuffers(uint8_t auto_swap)
+.. cpp:function:: uint8_t matrix_gfx::setAutoSwapBuffers(uint8_t auto_swap)
 
     :param auto_swap: 0 = False | 1 = True
 
     Set option to swap buffers after each command.
+
+.. cpp:function:: void matrix_gfx::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t color1, uint8_t color2, uint8_t color3)
+
+    Draw a Bitmap.
+
 
 .. _Base Sensor:
 

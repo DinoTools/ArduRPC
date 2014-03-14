@@ -34,7 +34,7 @@
 #define RPC_SHARED_BUFFERS 1
 
 //! Maximum number of bytes available for data or shared buffer
-#define RPC_MAX_DATA_LENGTH 128
+#define RPC_MAX_DATA_LENGTH 256
 
 //! Maximum number of bytes available for result buffer.
 /*! Only change if RPC_SHARED_BUFFERS is set to 0 */

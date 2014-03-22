@@ -170,7 +170,7 @@ But it might also be possible to wrap any other library.
 +------+--------------------------------------------+------+----------+
 | 0x52 | :cpp:func:`matrix_gfx::setAutoSwapBuffers` |      | X        |
 +------+--------------------------------------------+------+----------+
-| 0x60 | :cpp:func:`matrix_gfx::drawBitmap`         |      | X        |
+| 0x60 | :cpp:func:`matrix_gfx::drawImage`          |      | X        |
 +------+--------------------------------------------+------+----------+
 
 
@@ -294,10 +294,37 @@ But it might also be possible to wrap any other library.
 
     Set option to swap buffers after each command.
 
-.. cpp:function:: void matrix_gfx::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t color1, uint8_t color2, uint8_t color3)
+.. cpp:function:: void matrix_gfx::drawImage(int16_t x, int16_t y, int16_t width, int16_t height, uint8_t color_encoding, uint8_t *image)
 
-    Draw a Bitmap.
+    :param x: x-position
+    :param y: y-position
+    :param width: Image width
+    :param height: Image height
+    :param color_encoding: The color encoding. For more information have a look at the list below.
+    :param image: The image data
 
+    Color encoding:
+
+    Mode 0:
+        8-Bit encoding. From MSB to LSB:
+
+        * 2-Bit - red
+        * 3-Bit - green
+        * 3-Bit - blue
+
+    Mode 1:
+        16-Bit encoding. From MSB to LSB:
+
+        * 5-Bit - red
+        * 6-Bit - green
+        * 5-Bit - blue
+
+    Mode 2:
+        24-Bit encoding. From MSB to LSB:
+
+        * 8-Bit - red
+        * 8-Bit - green
+        * 8-Bit - blue
 
 .. _Base Sensor:
 

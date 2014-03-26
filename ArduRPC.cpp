@@ -327,10 +327,21 @@ uint8_t ArduRPC::handleSystemCalls(uint8_t cmd_id)
  */
 void ArduRPC::process()
 {
+  uint8_t raw_data_length;
+
   // reset result
   this->result.length = 0;
 
-  // protocoll version
+  raw_data_length = this->data.length;
+
+  // check for min packet size
+  if (raw_data_length < 4) {
+    this->setReturnCode(RPC_RETURN_INVALID_HEADER);
+    this->writeResult(RPC_NONE);
+    return;
+  }
+
+  // protocol version
   if (this->getParam_uint8() != 0x00) {
     return;
   }
@@ -339,6 +350,12 @@ void ArduRPC::process()
   uint8_t command_id = this->getParam_uint8();
   uint8_t length = this->getParam_uint8();
   uint8_t res = RPC_RETURN_FAILURE;
+
+  if (length != raw_data_length - 4) {
+    this->setReturnCode(RPC_RETURN_INVALID_REQUEST);
+    this->writeResult(RPC_NONE);
+    return;
+  }
 
   if(handler_id < this->handler_index) {
     rpc_handler_t *handler;

@@ -95,6 +95,10 @@
 
 //! The command has been executed successfully
 #define RPC_RETURN_SUCCESS 0
+//! Error in the packet data
+#define RPC_RETURN_INVALID_REQUEST 122
+//! Error while parsing the header
+#define RPC_RETURN_INVALID_HEADER 123
 //! Unable determine the requested function
 #define RPC_RETURN_FUNCTION_NOT_FOUND 124
 //! Unable determine the requested handler

@@ -106,7 +106,7 @@ typedef struct {
   //! The length of the data
   uint8_t length;
   //! The data of the buffer
-  char *data;
+  uint8_t *data;
 } rpc_data_t;
 
 //! Type is used for the result buffer
@@ -114,7 +114,7 @@ typedef struct {
   //! The length of the data
   uint8_t length;
   //! The data of the buffer
-  char *data;
+  uint8_t *data;
 } rpc_result_t;
 
 //! Used to store main information about a rpc function
@@ -204,6 +204,10 @@ class ArduRPC
       getParam_string(char *dst, uint8_t max_length);
     uint16_t
       getParam_uint16();
+    rpc_data_t
+      *getRawData();
+    rpc_result_t
+      *getRawResult();
   private:
     /* functions */
     uint8_t

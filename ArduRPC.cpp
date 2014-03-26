@@ -41,11 +41,11 @@ ArduRPC::ArduRPC(uint8_t handler_count, uint8_t function_count)
   this->function_index = 0;
   this->max_handler_count = handler_count;
   this->max_function_count = function_count;
-  this->data.data = (char *)malloc(RPC_MAX_DATA_LENGTH);
+  this->data.data = (uint8_t *)malloc(RPC_MAX_DATA_LENGTH);
 #if RPC_SHARED_BUFFERS == 1
   this->result.data = this->data.data;
 #else
-  this->result.data = (char *)malloc(RPC_MAX_RESULT_LENGTH);
+  this->result.data = (uint8_t *)malloc(RPC_MAX_RESULT_LENGTH);
 #endif
 }
 
@@ -204,6 +204,26 @@ uint16_t ArduRPC::getParam_uint16()
   res = rpc_read_uint16(&this->data.data[this->cur_data_read_pos]);
   this->cur_data_read_pos += 2;
   return res;
+}
+
+/**
+ * Return pointer to raw data structure.
+ *
+ * @return Pointer to raw data.
+ */
+rpc_data_t *ArduRPC::getRawData()
+{
+  return &this->data;
+}
+
+/**
+ * Return pointer to raw result data.
+ *
+ * @return Pointer to raw result data.
+ */
+rpc_result_t *ArduRPC::getRawResult()
+{
+  return &this->result;
 }
 
 /**

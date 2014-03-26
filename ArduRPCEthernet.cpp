@@ -57,8 +57,7 @@ void ArduRPCEthernetUDP::readData()
   rpc_result_t *result = this->_rpc->getRawResult();
 
   packet_size = this->_udp->parsePacket();
-  this->_rpc->reset();
-  if (packet_size <= 0)
+  if (packet_size == 0)
     return;
 
 #ifdef RPC_DEBUG
@@ -70,6 +69,15 @@ void ArduRPCEthernetUDP::readData()
 
   RPC_DEBUG_PRINT("Packet size: ");
   RPC_DEBUG_PRINTLN(packet_size);
+
+  // skip if packet size to large
+  if (packet_size > RPC_MAX_DATA_LENGTH) {
+    RPC_DEBUG_PRINTLN("Packet to large. Skipping");
+    return;
+  }
+
+  this->_rpc->reset();
+
   this->_udp->read(data->data, RPC_MAX_DATA_LENGTH);
   data->length = packet_size;
     

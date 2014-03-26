@@ -44,6 +44,9 @@
 /*! Keep it as small as possible and don't waste memory */
 #define RPC_MAX_NAME_LENGTH 16
 
+// Uncomment to get debug information over serial
+//#define RPC_DEBUG
+
 /* Config end */
 
 //! Major version
@@ -100,6 +103,17 @@
 #define RPC_RETURN_COMMAND_NOT_FOUND 126
 //! An error occurred 
 #define RPC_RETURN_FAILURE 127
+
+#ifdef RPC_DEBUG
+#define RPC_DEBUG_CMD(...) (__VA_ARGS__)
+#define RPC_DEBUG_PRINT(...) Serial.print(__VA_ARGS__)
+#define RPC_DEBUG_PRINTLN(...) Serial.println(__VA_ARGS__)
+#else /* defined RPC_DEBUG */
+#define RPC_DEBUG_CMD(...)
+#define RPC_DEBUG_PRINT(...)
+#define RPC_DEBUG_PRINTLN(...)
+#endif /* defined RPC_DEBUG */
+
 
 //! Type is used for the processing buffer
 typedef struct {

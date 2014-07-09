@@ -49,7 +49,7 @@ copyright = '2013-2014, DinoTools.org'
 #
 # The short X.Y version.
 version_parts = ['0', '0', '0']
-fp = open('../../ArduRPC.h', 'r')
+fp = open('../../ArduRPC/ArduRPC.h', 'r')
 regex_define = re.compile('^#define\s+(?P<name>\S+)\s+(?P<value>[0-9]+)\s$')
 for line in fp:
     m = regex_define.match(line)

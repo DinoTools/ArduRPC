@@ -150,9 +150,7 @@ typedef struct {
   //! The type of the rpc handler. See documentation for more information.
   uint16_t type;
   //! A pointer to the callback function of the handler.
-  void *callback;
-  //! A pointer to the arguments passed to the callback.
-  void *arguments;
+  void *handler;
 } rpc_handler_t;
 
 //! Additional information about a rpc handler. But not used for rpc functions.
@@ -198,7 +196,7 @@ class ArduRPC
       connectFunction(rpc_function_t function),
       connectFunction(uint8_t type, void *callback, void *arguments),
       connectHandler(rpc_handler_t handler),
-      connectHandler(uint16_t type, void *callback, void *arguments),
+      connectHandler(void *handler),
       readResult(),
       *getResultData(),
       copyData(uint8_t *src, uint8_t len),
@@ -264,6 +262,27 @@ class ArduRPC
       max_handler_count,
       //! Maximum number of connected functions
       max_function_count;
+};
+
+/**
+ * Prototype for all ArduRPC handlers
+ */
+class ArduRPCHandler
+{
+  public:
+    ArduRPCHandler();
+    void
+      registerSelf(ArduRPC &rpc, char *name, void *handler),
+      setRPC(ArduRPC &rpc),
+      setRPC(ArduRPC *rpc);
+    virtual uint8_t
+      call(uint8_t cmd_id) = 0;
+    uint16_t
+      //! Type of the handler
+      type;
+    ArduRPC
+      //! Internal RPC object the handler has been connected to
+      *_rpc;
 };
 
 /**

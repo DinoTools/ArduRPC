@@ -36,10 +36,10 @@
 /**
  * Handle serial communication.
  */
-class ArduRPCEthernetUDP
+class ArduRPC_EthernetUDP
 {
   public:
-    ArduRPCEthernetUDP(EthernetUDP &udp, ArduRPC &rpc);
+    ArduRPC_EthernetUDP(EthernetUDP &udp, ArduRPC &rpc);
     void loop();
     void readData();
   private:

@@ -18,7 +18,7 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ArduRPCEthernet.h"
+#include "ArduRPC_Ethernet.h"
 
 /**
  * The constructor.
@@ -27,7 +27,7 @@
  * @param rpc: Specify the rpc handler to use
  *
  */
-ArduRPCEthernetUDP::ArduRPCEthernetUDP(EthernetUDP &udp, ArduRPC &rpc)
+ArduRPC_EthernetUDP::ArduRPC_EthernetUDP(EthernetUDP &udp, ArduRPC &rpc)
 {
   this->_udp = &udp;
   this->_rpc = &rpc;
@@ -40,7 +40,7 @@ ArduRPCEthernetUDP::ArduRPCEthernetUDP(EthernetUDP &udp, ArduRPC &rpc)
  *
  * This function will never return.
  */
-void ArduRPCEthernetUDP::loop()
+void ArduRPC_EthernetUDP::loop()
 {
   while(1)
     this->readData();
@@ -49,7 +49,7 @@ void ArduRPCEthernetUDP::loop()
 /**
  * Parse a packet and process the data.
  */
-void ArduRPCEthernetUDP::readData()
+void ArduRPC_EthernetUDP::readData()
 {
   uint8_t length;
   int packet_size;

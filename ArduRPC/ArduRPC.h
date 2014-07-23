@@ -288,10 +288,10 @@ class ArduRPCHandler
 /**
  * Handle serial communication.
  */
-class ArduRPCSerial
+class ArduRPC_Serial
 {
   public:
-    ArduRPCSerial(Stream &serial, ArduRPC &rpc);
+    ArduRPC_Serial(Stream &serial, ArduRPC &rpc);
     void loop();
     void processDataHex(uint8_t c);
     void readData();

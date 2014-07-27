@@ -335,7 +335,7 @@ But it might also be possible to wrap any other library.
 .. _Extended Text-LCD:
 
 Base/Extended Text-LCD
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 +------+--------------------------------------+-----------------+
 | ID   | Function                             | Text-LCD Type   |

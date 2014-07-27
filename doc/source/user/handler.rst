@@ -34,6 +34,10 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0281          |      | Colorduino_GFX                                                                | Deprecated   |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0300 | 0x03FF |    8 | :ref:`Base Text-LCD <Base Text-LCD>`                                          | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0380 | 0x03FF |    8 | :ref:`Extended Text-LCD <Extended Text-LCD>`                                  | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0400 | 0x04FF |    8 | :ref:`Base Sensor`                                                            | Experimental |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0401          |      | :ref:`Temperature Sensor <Temperature Sensor>`                                | Experimental |
@@ -325,6 +329,71 @@ But it might also be possible to wrap any other library.
         * 8-Bit - red
         * 8-Bit - green
         * 8-Bit - blue
+
+
+.. _Base Text-LCD:
+.. _Extended Text-LCD:
+
+Base/Extended Text-LCD
+~~~~~~~~~~~~~~~~~
+
++------+--------------------------------------+-----------------+
+| ID   | Function                             | Text-LCD Type   |
++------+--------------------------------------+------+----------+
+|      |                                      | Base | Extended |
++======+======================================+======+==========+
+| 0x01 | :cpp:func:`text_lcd::getWidth`       | X    | X        |
++------+--------------------------------------+------+----------+
+| 0x02 | :cpp:func:`text_lcd::getHeight`      | X    | X        |
++------+--------------------------------------+------+----------+
+| 0x11 | :cpp:func:`text_lcd::clear`          | X    | X        |
++------+--------------------------------------+------+----------+
+| 0x12 | :cpp:func:`text_lcd::home`           | X    | X        |
++------+--------------------------------------+------+----------+
+| 0x13 | :cpp:func:`text_lcd::setCursor`      | x    | X        |
++------+--------------------------------------+------+----------+
+| 0x21 | :cpp:func:`text_lcd::write`          | X    | X        |
++------+--------------------------------------+------+----------+
+| 0x22 | :cpp:func:`text_lcd::print`          | X    | X        |
++------+--------------------------------------+------+----------+
+
+
+.. cpp:function:: uint8_t text_lcd::getWidth()
+
+    Get the width as number of characters.
+
+.. cpp:function:: uint8_t text_lcd::getHeight()
+
+    Get the height as number of characters.
+
+.. cpp:function:: void text_lcd::clear()
+
+    Clear the LCD screen and set the cursor position to the upper-left corner.
+
+.. cpp:function:: void text_lcd::home()
+
+    Set the cursor position to the upper-left corner.
+
+.. cpp:function:: void text_lcd::setCursor(uint8_t col, uint8_t row)
+
+    :param col: The column
+    :param row: The row
+
+    Position the cursor.
+
+.. cpp:function:: void text_lcd::write(char c)
+
+    :param c: The character to display
+
+    Print a single character to the LCD.
+
+.. cpp:function:: void text_lcd::print(uint8_t num, char[] text)
+
+    :param num: Number of characters
+    :param text: The text to display
+
+    Print text to the LCD.
+
 
 .. _Base Sensor:
 

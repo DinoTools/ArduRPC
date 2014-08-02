@@ -42,6 +42,10 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0403          |      | :ref:`Temperature-Humidity Sensor`                                            | Experimental |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0500 | 0x05FF |    8 | :ref:`Base Board`                                                             | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
+| 0x0501          |   16 | :ref:`Arduino Board`                                                          | Experimental |
++--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0xFF00 | 0xFFFF |    8 | :ref:`Custom handlers`                                                        | n/a          |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 
@@ -486,6 +490,59 @@ Temperature-Humidity Sensor
 .. cpp:function:: float sensor_temp_humidity::getHumidity()
 
     Get the current humidity.
+
+.. _Base Board:
+
+Base Board
+~~~~~~~~~~
+
+At the moment only Arduino based boards are supported.
+
+.. _Arduino Board:
+
+Arduino Board
+~~~~~~~~~~~~~
+
+A handler of this type is used to control Arduino based boards.
+
++------+----------------------------------------------+
+| ID   | Function                                     |
++======+==============================================+
+| 0x11 | :cpp:func:`board_arduino::getAnalogInput`    |
++------+----------------------------------------------+
+| 0x21 | :cpp:func:`board_arduino::getDigitalInput`   |
++------+----------------------------------------------+
+| 0x22 | :cpp:func:`board_arduino::setDigitalOutput`  |
++------+----------------------------------------------+
+| 0x31 | :cpp:func:`board_arduino::setPWMOutput`      |
++------+----------------------------------------------+
+
+.. cpp:function:: uint16 board_arduino::getAnalogInput(uint8_t pin)
+
+    Get the value of an analog input pin.
+
+    :param pin: Pin number
+
+.. cpp:function:: uint16 board_arduino::getDigitalInput(uint8_t pin)
+
+    Get the value of an digital input pin.
+
+    :param pin: Pin number
+
+.. cpp:function:: uint16 board_arduino::setDigitalOutput(uint8_t pin, uint8_t value)
+
+    Set the value of a digital output pin.
+
+    :param pin: Pin number
+    :param value: The value (0, 1)
+
+.. cpp:function:: uint16 board_arduino::setPWMOutput(uint8_t pin, uint8_t value)
+
+    Set the value of a PWM output pin.
+
+    :param pin: Pin number
+    :param value: The PWM value (0-255)
+
 
 .. _Custom handlers:
 

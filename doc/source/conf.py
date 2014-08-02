@@ -109,7 +109,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'nature'
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -202,7 +202,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'ArduRPC.tex', 'ArduRPC Documentation',
-   'Philipp Seidel(DinoTools.org)', 'manual'),
+   'PhiBo (DinoTools.org)', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -232,7 +232,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'ardurpc', 'ArduRPC Documentation',
-     ['Philipp Seidel(DinoTools.org)'], 1)
+     ['PhiBo (DinoTools.org)'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -246,7 +246,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'ArduRPC', 'ArduRPC Documentation',
-   'Philipp Seidel(DinoTools.org)', 'ArduRPC', 'One line description of project.',
+   'PhiBo (DinoTools.org)', 'ArduRPC', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -264,9 +264,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = 'ArduRPC'
-epub_author = 'Philipp Seidel(DinoTools.org)'
-epub_publisher = 'Philipp Seidel(DinoTools.org)'
-epub_copyright = '2013, Philipp Seidel(DinoTools.org)'
+epub_author = 'PhiBo (DinoTools.org)'
+epub_publisher = 'PhiBo DinoTools.org)'
+epub_copyright = '2013-2014, PhiBo (DinoTools.org)'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

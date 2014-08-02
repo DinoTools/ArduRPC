@@ -53,7 +53,7 @@
 #define RPC_VERSION_MAJOR 0
 
 //! Minor version
-#define RPC_VERSION_MINOR 3
+#define RPC_VERSION_MINOR 4
 
 //! Patch level
 #define RPC_VERSION_PATCH 0

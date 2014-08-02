@@ -1,14 +1,16 @@
 Changelog
 =========
 
-Version 0.4.0 (xx.xx.201x)
+Version 0.4.0 (02.08.2014)
 --------------------------
 
-* Docu:     Temperature and humidity sensors
+* Docs:     New handler type for temperature and humidity sensors
 * Protocol: Support float types
 * Feature:  Set max packet size to 256 byte
-* Feature:  ArduRPCEthernetUDP class
+* Feature:  New ArduRPC_Ethernet lib
 * Feature:  Handlers have to be a class
+* Core:     Rename ArduRPCSerial to ArduRPC_Serial
+* Docs:     New handler type for Arduino based boards
 
 Version 0.3.0 (25.02.2014)
 --------------------------

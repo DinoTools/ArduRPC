@@ -22,9 +22,9 @@ To register a new handler type feel free to open a new request by using the `iss
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | Start  | End    | Mask | Name                                                                          | Status       |
 +========+========+======+===============================================================================+==============+
-| 0x0100 | 0x01FF |    8 | :ref:`Base Pixel Strip`                                                       | Beta         |
+| 0x0100 | 0x01FF |    8 | :ref:`Base Pixel Strip <Base Pixel Strip>`                                    | Beta         |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
-| 0x0180 | 0x01FF |    9 | :ref:`Extended Pixel Strip`                                                   | Experimental |
+| 0x0180 | 0x01FF |    9 | :ref:`Extended Pixel Strip <Extended Pixel Strip>`                            | Experimental |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
 | 0x0181          |      | Adafruit_NeoPixel                                                             | Deprecated   |
 +--------+--------+------+-------------------------------------------------------------------------------+--------------+
@@ -53,35 +53,38 @@ Base types
 ----------
 
 .. _base pixel strip:
+.. _extended pixel strip:
 
-Base Pixel Strip
-~~~~~~~~~~~~~~~~
+Base/Extended Pixel Strip
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+------+----------------------------------------------+
-| ID   | Function                                     |
-+======+==============================================+
-| 0x01 | :cpp:func:`base_pixel_strip::getColorCount`  |
-+------+----------------------------------------------+
-| 0x02 | :cpp:func:`base_pixel_strip::getPixelCount`  |
-+------+----------------------------------------------+
-| 0x11 | :cpp:func:`base_pixel_strip::setPixelColor`  |
-+------+----------------------------------------------+
-| 0x12 | :cpp:func:`base_pixel_strip::setRangeColor`  |
-+------+----------------------------------------------+
++------+----------------------------------------------+-----------------+
+| ID   | Function                                     | Strip Type      |
++------+----------------------------------------------+------+----------+
+|      |                                              | Base | Extended |
++======+==============================================+======+==========+
+| 0x01 | :cpp:func:`pixel_strip::getColorCount`       | X    | x        |
++------+----------------------------------------------+------+----------+
+| 0x02 | :cpp:func:`pixel_strip::getPixelCount`       | X    | x        |
++------+----------------------------------------------+------+----------+
+| 0x11 | :cpp:func:`pixel_strip::setPixelColor`       | X    | x        |
++------+----------------------------------------------+------+----------+
+| 0x12 | :cpp:func:`pixel_strip::setRangeColor`       | X    | x        |
++------+----------------------------------------------+------+----------+
 
-.. cpp:function:: uint8_t base_led_strip::getColorCount()
+.. cpp:function:: uint8_t pixel_strip::getColorCount()
 
     Get the number of colors. Return value should be 1, 2 or 3.
 
     :return: Number of colors.
 
-.. cpp:function:: uint16_t base_led_strip::getPixelCount()
+.. cpp:function:: uint16_t pixel_strip::getPixelCount()
 
     Get the number of available pixels.
 
     :return: Number of pixels
 
-.. cpp:function:: void base_led_strip::setPixelColor(uint16_t n, uint8_t color1, uint8_t color2, uint8_t color3)
+.. cpp:function:: void pixel_strip::setPixelColor(uint16_t n, uint8_t color1, uint8_t color2, uint8_t color3)
 
     Set the color of a pixel. All color values MUST be given and spare colors will be ignored by the device.
 
@@ -90,7 +93,7 @@ Base Pixel Strip
     :param color2: Second color. Green if color_count = 3.
     :param color3: Third color. Blue if color_count = 3.
 
-.. cpp:function:: void base_led_strip::setRangeColor(uint16_t start, uint16_t end, uint8_t color1, uint8_t color2, uint8_t color3)
+.. cpp:function:: void pixel_strip::setRangeColor(uint16_t start, uint16_t end, uint8_t color1, uint8_t color2, uint8_t color3)
 
     Set the color of a range of pixels.
 
@@ -100,11 +103,6 @@ Base Pixel Strip
     :param color2: Second color. Green if color_count = 3.
     :param color3: Third color. Blue if color_count = 3.
 
-
-.. _extended pixel strip:
-
-Extended Pixel Strip
-~~~~~~~~~~~~~~~~~~~~
 
 .. _Base Matrix:
 .. _Extended Matrix:

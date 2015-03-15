@@ -99,7 +99,6 @@ void ArduRPC_Serial::processResultHex()
       return;
     }
 
-    this->_serial->println(len);
     this->_serial->print(":");
     data = this->_rpc->getResultData();
     for (i = 0; i < len; i++) {

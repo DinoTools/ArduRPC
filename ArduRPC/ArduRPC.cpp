@@ -56,8 +56,9 @@ ArduRPC::ArduRPC(uint8_t handler_count, uint8_t function_count)
  */
 uint8_t ArduRPC::connectFunction(rpc_function_t function)
 {
-  if(this->function_index >= this->max_function_count - 1)
+  if(this->function_index >= this->max_function_count - 1) {
     return 0xff;
+  }
   this->functions[this->function_index] = function;
   return this->function_index++;
 }
@@ -83,8 +84,9 @@ uint8_t ArduRPC::connectFunction(uint8_t type, void *callback, void *arguments)
  */
 uint8_t ArduRPC::connectHandler(rpc_handler_t handler)
 {
-  if(this->handler_index >= this->max_handler_count - 1)
+  if(this->handler_index >= this->max_handler_count - 1) {
     return 0xff;
+  }
   handlers[this->handler_index] = handler;
   return this->handler_index++;
 }

@@ -42,8 +42,9 @@ ArduRPC_EthernetUDP::ArduRPC_EthernetUDP(EthernetUDP &udp, ArduRPC &rpc)
  */
 void ArduRPC_EthernetUDP::loop()
 {
-  while(1)
+  while(1) {
     this->readData();
+  }
 }
 
 /**
@@ -57,8 +58,9 @@ void ArduRPC_EthernetUDP::readData()
   rpc_result_t *result = this->_rpc->getRawResult();
 
   packet_size = this->_udp->parsePacket();
-  if (packet_size == 0)
+  if (packet_size == 0) {
     return;
+  }
 
 #ifdef RPC_DEBUG
   for (byte thisByte = 0; thisByte < 4; thisByte++) {
@@ -85,8 +87,9 @@ void ArduRPC_EthernetUDP::readData()
   this->_rpc->process();
 
   length = this->_rpc->getResultLength();
-  if (length == 0)
+  if (length == 0) {
     return;
+  }
 
   RPC_DEBUG_PRINTLN("Begin response");
   RPC_DEBUG_PRINT("Data length: ");

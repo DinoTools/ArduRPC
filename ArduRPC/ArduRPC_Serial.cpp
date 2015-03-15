@@ -43,8 +43,9 @@ ArduRPC_Serial::ArduRPC_Serial(Stream &serial, ArduRPC &rpc)
  */
 void ArduRPC_Serial::loop()
 {
-  while(1)
+  while(1) {
     readData();
+  }
 }
 
 /**
@@ -54,8 +55,9 @@ void ArduRPC_Serial::loop()
  */
 void ArduRPC_Serial::processDataHex(uint8_t c)
 {
-  if(c == '\r')
+  if(c == '\r') {
     return;
+  }
 
   if(c == '\n') {
     this->_rpc->process();
@@ -66,11 +68,9 @@ void ArduRPC_Serial::processDataHex(uint8_t c)
 
   if(c >= 97) {
     c -= 87;
-  } 
-  else if(c >= 65) {
+  } else if(c >= 65) {
     c -= 55;
-  } 
-  else {
+  } else {
     c -= 48;
   }
 
@@ -95,8 +95,9 @@ void ArduRPC_Serial::processResultHex()
     uint8_t *data;
 
     len = this->_rpc->getResultLength();
-    if (len == 0)
+    if (len == 0) {
       return;
+    }
 
     this->_serial->println(len);
     this->_serial->print(":");
@@ -117,13 +118,15 @@ void ArduRPC_Serial::readData()
 {
   uint8_t c;
 
-  if (this->_serial->available() < 1)
+  if (this->_serial->available() < 1) {
     return;
+  }
 
   c = this->_serial->read();
 
-  if (this->_state == 1)
+  if (this->_state == 1) {
     processDataHex(c);
+  }
 
   if (this->_state == 0 && c == ':') {
     this->_state = 1;

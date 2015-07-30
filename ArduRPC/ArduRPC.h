@@ -189,9 +189,11 @@ class ArduRPC
       writeResult_float(float value),
       writeResult_int8(int8_t value),
       writeResult_int16(int16_t value),
+      writeResult_int32(int32_t value),
       writeResult_string(char *string, uint8_t length),
       writeResult_uint8(uint8_t value),
-      writeResult_uint16(uint16_t value);
+      writeResult_uint16(uint16_t value),
+      writeResult_uint32(uint32_t value);
     uint8_t
       connectFunction(rpc_function_t function),
       connectFunction(uint8_t type, void *callback, void *arguments),

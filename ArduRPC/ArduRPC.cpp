@@ -498,6 +498,19 @@ bool ArduRPC::writeResult_int16(int16_t value)
 }
 
 /**
+ * Write a value of type INT32
+ * @param value The value to write.
+ */
+bool ArduRPC::writeResult_int32(int32_t value)
+{
+  this->writeResult(RPC_INT32);
+  this->writeResult((((value) >> 24) & 0xff));
+  this->writeResult((((value) >> 16) & 0xff));
+  this->writeResult((((value) >> 8) & 0xff));
+  this->writeResult(((value) & 0xff));
+}
+
+/**
  * Write a value of type STRING
  * @param value The value to write.
  * @param length The string length.
@@ -526,6 +539,19 @@ bool ArduRPC::writeResult_uint8(uint8_t value)
 bool ArduRPC::writeResult_uint16(uint16_t value)
 {
   this->writeResult(RPC_UINT16);
+  this->writeResult((((value) >> 8) & 0xff));
+  this->writeResult(((value) & 0xff));
+}
+
+/**
+ * Write a value of type UINT32
+ * @param value The value to write.
+ */
+bool ArduRPC::writeResult_uint32(uint32_t value)
+{
+  this->writeResult(RPC_UINT32);
+  this->writeResult((((value) >> 24) & 0xff));
+  this->writeResult((((value) >> 16) & 0xff));
   this->writeResult((((value) >> 8) & 0xff));
   this->writeResult(((value) & 0xff));
 }

@@ -217,11 +217,15 @@ class ArduRPC
       getParam_int8();
     int16_t
       getParam_int16();
+    int32_t
+      getParam_int32();
     uint8_t
       getParam_uint8(),
       getParam_string(char *dst, uint8_t max_length);
     uint16_t
       getParam_uint16();
+    uint32_t
+      getParam_uint32();
     rpc_data_t
       *getRawData();
     rpc_result_t
@@ -354,6 +358,25 @@ static inline int16_t rpc_read_int16(void *data)
 }
 
 /**
+ * Extract four bytes from given data
+ * @param data array
+ * @return Extracted data
+ */
+static inline int32_t rpc_read_int32(void *data)
+{
+  int32_t res;
+  uint8_t *d = (uint8_t *)data;
+  res = d[0];
+  res = res << 8;
+  res = res | d[1];
+  res = res << 8;
+  res = res | d[2];
+  res = res << 8;
+  res = res | d[3];
+  return res;
+}
+
+/**
  * Extract one byte from given data
  * @param data array
  * @return Extracted data
@@ -379,4 +402,22 @@ static inline uint16_t rpc_read_uint16(void *data)
   return res;
 }
 
+/**
+ * Extract four byte from given data
+ * @param data array
+ * @return Extracted data
+ */
+static inline uint32_t rpc_read_uint32(void *data)
+{
+  uint32_t res;
+  uint8_t *d = (uint8_t *)data;
+  res = d[0];
+  res = res << 8;
+  res = res | d[1];
+  res = res << 8;
+  res = res | d[2];
+  res = res << 8;
+  res = res | d[3];
+  return res;
+}
 #endif

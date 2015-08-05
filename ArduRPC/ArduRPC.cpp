@@ -169,6 +169,17 @@ int16_t ArduRPC::getParam_int16()
 }
 
 /**
+ * Read four bytes from the current position in the parameter data and return it.
+ */
+int32_t ArduRPC::getParam_int32()
+{
+  int16_t res;
+  res = rpc_read_int32(&this->data.data[this->cur_data_read_pos]);
+  this->cur_data_read_pos += 4;
+  return res;
+}
+
+/**
  * Read a string from the current position in the parameter data.
  * @param dst Pointer to the destination.
  * @param max_length The maximum number of bytes to copy.
@@ -208,6 +219,17 @@ uint16_t ArduRPC::getParam_uint16()
   uint16_t res;
   res = rpc_read_uint16(&this->data.data[this->cur_data_read_pos]);
   this->cur_data_read_pos += 2;
+  return res;
+}
+
+/**
+ * Read four bytes from the current position in the parameter data and return it.
+ */
+uint32_t ArduRPC::getParam_uint32()
+{
+  uint32_t res;
+  res = rpc_read_uint32(&this->data.data[this->cur_data_read_pos]);
+  this->cur_data_read_pos += 4;
   return res;
 }
 

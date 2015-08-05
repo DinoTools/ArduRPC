@@ -183,6 +183,9 @@ uint8_t ArduRPC::getParam_string(char *dst, uint8_t max_length)
     n = max_length;
   }
   memcpy(dst, &this->data.data[this->cur_data_read_pos], n);
+  if(n < max_length) {
+    dst[n] = '\0';
+  }
   this->cur_data_read_pos += length;
   return n;
 }

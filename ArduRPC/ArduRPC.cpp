@@ -458,7 +458,7 @@ bool ArduRPC::writeResult(uint8_t c)
  */
 bool ArduRPC::writeResult(char *string, uint8_t length)
 {
-  memcpy(&this->result.data[this->result.length + 1], string, RPC_MAX_NAME_LENGTH);
+  memcpy(&this->result.data[this->result.length + 1], string, length);
   this->result.length = this->result.length + length;
 }
 

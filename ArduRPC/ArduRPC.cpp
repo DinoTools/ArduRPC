@@ -34,7 +34,15 @@
  */
 ArduRPC::ArduRPC(uint8_t handler_count, uint8_t function_count)
 {
+  uint8_t i;
+  rpc_handler_t handler;
+
   this->handlers = (rpc_handler_t *)malloc(sizeof(rpc_handler_t) * handler_count);
+
+  handler = {0xffff, NULL};
+  for(i = 0; i < handler_count; i++) {
+    handlers[i] = handler;
+  }
   this->functions = (rpc_function_t *)malloc(sizeof(rpc_function_t) * function_count);
   this->handler_infos = (rpc_handler_info_t *)malloc(sizeof(rpc_handler_info_t) * handler_count);
   this->handler_index = 0;
@@ -84,11 +92,46 @@ uint8_t ArduRPC::connectFunction(uint8_t type, void *callback, void *arguments)
  */
 uint8_t ArduRPC::connectHandler(rpc_handler_t handler)
 {
+  uint8_t i;
+
+  if(this->handler_index >= this->max_handler_count - 1) {
+    return 0xff;
+  }
+
+  for(i = this->handler_index; i < this->max_handler_count; i++) {
+    this->handler_index = i;
+    if(this->handlers[i].handler == NULL) {
+      break;
+    }
+  }
+
   if(this->handler_index >= this->max_handler_count - 1) {
     return 0xff;
   }
   handlers[this->handler_index] = handler;
   return this->handler_index++;
+}
+
+/**
+ * Connect a handler to the RPC processor.
+ * @param handler All information to call the handler.
+ * @param handler_id The ID of the handler
+ * @return The internal handler index.
+ */
+uint8_t ArduRPC::connectHandler(rpc_handler_t handler, uint8_t handler_id)
+{
+  uint8_t i;
+
+  if(handler_id >= this->max_handler_count - 1) {
+    return 0xff;
+  }
+
+  if(this->handlers[handler_id].handler != NULL) {
+    return 0xff;
+  }
+
+  handlers[handler_id] = handler;
+  return handler_id;
 }
 
 /**
@@ -102,7 +145,22 @@ uint8_t ArduRPC::connectHandler(void *handler)
   ArduRPCHandler *h = (ArduRPCHandler *)handler;
   h->setRPC(this);
   rpc_handler_t handler_data = {h->type, handler};
-  return connectHandler(handler_data);
+  return this->connectHandler(handler_data);
+}
+
+/**
+ * Connect a handler to the RPC processor.
+ * @param handler Pointer to the handler class.
+ * @param handler_id The ID of the handler
+ * @return The internal handler index.
+ */
+uint8_t ArduRPC::connectHandler(void *handler, uint8_t handler_id)
+{
+  // Type cast
+  ArduRPCHandler *h = (ArduRPCHandler *)handler;
+  h->setRPC(this);
+  rpc_handler_t handler_data = {h->type, handler};
+  return this->connectHandler(handler_data, handler_id);
 }
 
 /**
@@ -599,13 +657,60 @@ ArduRPCHandler::ArduRPCHandler()
  * @param name: The name of the handler
  * @param handler: Pointer to the handler.
  */
-void ArduRPCHandler::registerSelf(ArduRPC &rpc, char *name, void *handler)
+uint8_t ArduRPCHandler::registerSelf(ArduRPC &rpc, char *name, void *handler)
 {
   uint8_t handler_id;
-
   ArduRPC *r = &rpc;
+
+  if(r == NULL) {
+    return 0xff;
+  }
+
   handler_id = r->connectHandler(handler);
   r->setHandlerName(handler_id, name);
+}
+
+/**
+ * Internal function to register the handler.
+ *
+ * This function must be called by the handler to connect itself with ArduRPC.
+ *
+ * @param rpc: The AarduRPC object
+ * @param name: The name of the handler
+ */
+uint8_t ArduRPCHandler::registerSelf(ArduRPC &rpc, char *name)
+{
+  uint8_t handler_id;
+  ArduRPC *r = &rpc;
+
+  if(r == NULL) {
+    return 0xff;
+  }
+
+  handler_id = r->connectHandler((void *)this);
+  r->setHandlerName(handler_id, name);
+}
+
+/**
+ * Internal function to register the handler.
+ *
+ * This function must be called by the handler to connect itself with ArduRPC.
+ *
+ * @param rpc: The AarduRPC object
+ * @param name: The name of the handler
+ * @param handler_id:
+ */
+uint8_t ArduRPCHandler::registerSelf(ArduRPC &rpc, char *name, uint8_t handler_id)
+{
+  ArduRPC *r = &rpc;
+
+  if(r == NULL) {
+    return 0xff;
+  }
+
+  handler_id = r->connectHandler((void *)this, handler_id);
+  r->setHandlerName(handler_id, name);
+  return handler_id;
 }
 
 /**

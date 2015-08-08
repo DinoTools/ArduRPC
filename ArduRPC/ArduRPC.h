@@ -198,7 +198,9 @@ class ArduRPC
       connectFunction(rpc_function_t function),
       connectFunction(uint8_t type, void *callback, void *arguments),
       connectHandler(rpc_handler_t handler),
+      connectHandler(rpc_handler_t, uint8_t),
       connectHandler(void *handler),
+      connectHandler(void *, uint8_t),
       readResult(),
       *getResultData(),
       copyData(uint8_t *src, uint8_t len),
@@ -277,8 +279,11 @@ class ArduRPCHandler
 {
   public:
     ArduRPCHandler();
+    uint8_t
+      registerSelf(ArduRPC &rpc, char *name),
+      registerSelf(ArduRPC &rpc, char *name, uint8_t),
+      registerSelf(ArduRPC &rpc, char *name, void *handler);
     void
-      registerSelf(ArduRPC &rpc, char *name, void *handler),
       setRPC(ArduRPC &rpc),
       setRPC(ArduRPC *rpc);
     virtual uint8_t

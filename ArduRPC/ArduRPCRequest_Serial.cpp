@@ -115,14 +115,16 @@ bool ArduRPCRequest_Serial::waitResult()
       this->error = 1;
       return false;
     }
-    if (this->_serial->available() < 1) {
+    if (this->_serial->available() == 0) {
+      // Some boards crash without a delay()
+      delay(100);
       continue;
     }
   
     c = this->_serial->read();
   
     if (this->_state == 1) {
-      result = processDataHex(c);
+      result = this->processDataHex(c);
       if (result) {
         this->_state = 0;
         return true;

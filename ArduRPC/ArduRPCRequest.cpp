@@ -67,6 +67,12 @@ uint8_t ArduRPCRequest::getError()
   return this->error;
 }
 
+uint8_t ArduRPCRequest::getResultCurrentData(uint8_t **data)
+{
+  *data = &this->result.data[this->cur_result_read_pos];
+  return this->result.length - this->cur_result_read_pos;
+}
+
 bool ArduRPCRequest::setHandler(void *handler)
 {
   this->handler = handler;

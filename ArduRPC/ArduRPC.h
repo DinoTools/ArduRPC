@@ -344,7 +344,8 @@ class ArduRPCRequest
       *handler;
     uint8_t
       getConnectionError(),
-      getError();
+      getError(),
+      getResultCurrentData(uint8_t **);
     uint8_t
       readResult_raw_uint8(),
       readResult_string(char *, uint8_t),

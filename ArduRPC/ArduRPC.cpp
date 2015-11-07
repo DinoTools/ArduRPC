@@ -442,12 +442,15 @@ void ArduRPC::process()
     return;
   }
 
-  if(handler_id < this->handler_index) {
+  if(handler_id < this->max_handler_count) {
     rpc_handler_t *handler;
     handler = &handlers[handler_id];
-
-    ArduRPCHandler *h = (ArduRPCHandler *)handler->handler;
-    res = h->call(command_id);
+    if(handler->handler != NULL) {
+      ArduRPCHandler *h = (ArduRPCHandler *)handler->handler;
+      res = h->call(command_id);
+    } else {
+      res = RPC_RETURN_HANDLER_NOT_FOUND;
+    }
   } else if (handler_id == 0xfe) {
     if (command_id >= this->function_index) {
       res = RPC_RETURN_FUNCTION_NOT_FOUND;

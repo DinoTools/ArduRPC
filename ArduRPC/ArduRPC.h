@@ -320,6 +320,112 @@ class ArduRPC_Serial
     void processResultHex();
 };
 
+class ArduRPCRequest
+{
+  public:
+    ArduRPCRequest();
+    bool
+      call(uint8_t, uint8_t),
+      setHandler(void *),
+      writeRequest(uint8_t c),
+      writeRequest_float(float value),
+      writeRequest_int8(int8_t value),
+      writeRequest_int16(int16_t value),
+      writeRequest_int32(int32_t value),
+      writeRequest_string(char *),
+      writeRequest_uint8(uint8_t value),
+      writeRequest_uint16(uint16_t value),
+      writeRequest_uint32(uint32_t value),
+      writeResult(uint8_t c);
+    int8_t
+      readResult_int8();
+    int16_t
+      readResult_int16();
+    int32_t
+      readResult_int32();
+    void
+      reset();
+    void
+      *handler;
+    uint8_t
+      getConnectionError(),
+      getError(),
+      getResultCurrentData(uint8_t **);
+    uint8_t
+      readResult_raw_uint8(),
+      readResult_string(char *, uint8_t),
+      readResult_type(uint8_t),
+      readResult_uint8();
+    uint16_t
+      readResult_uint16();
+    uint32_t
+      readResult_uint32();
+      //readResult();
+    uint8_t
+      return_code;
+  private:
+    rpc_result_t
+      //! Result buffer
+      result;
+    rpc_data_t
+      //! Data buffer
+      request;
+
+    // internal stuff
+    uint8_t
+      error,
+      //! Current position in the data buffer while reading data
+      cur_request_read_pos,
+      //! Current position in the result buffer while reading data
+      cur_result_read_pos;
+};
+
+class ArduRPCRequestHandler
+{
+  public:
+    ArduRPCRequestHandler();
+    ArduRPCRequest *_rpc;
+    uint8_t _handler_id;
+};
+
+class ArduRPCRequestConnection
+{
+  public:
+    ArduRPCRequestConnection();
+    virtual void reset() = 0;
+    virtual void send(rpc_data_t ) = 0;
+    virtual bool waitResult() = 0;
+    uint8_t
+      getError();
+    uint8_t error;
+    ArduRPCRequest *rpc;
+    unsigned long timeout;
+  private:
+};
+
+/**
+ * Handle serial communication.
+ */
+class ArduRPCRequest_Serial : public ArduRPCRequestConnection
+{
+  public:
+    ArduRPCRequest_Serial(ArduRPCRequest &rpc, Stream &serial);
+    void reset();
+    void send(rpc_data_t request);
+    bool waitResult();
+  private:
+    bool processDataHex(uint8_t c);
+    //! Serial port to use
+    Stream *_serial;
+    //! Internal processing state
+    uint8_t _state;
+    //! Temporary data
+    uint8_t _tmp_data;
+    //! Data part for hex strings. 0 = part 1 (bits 7-4); 1 = part 2 (bits 3-0)
+    uint8_t _tmp_data_part;
+    //void processResultHex();
+};
+
 //! Callback function for a rpc function
 typedef uint8_t (*rpc_callback_function_t)(ArduRPC *rpc, void *);
 //! Callback function for a rpc handler

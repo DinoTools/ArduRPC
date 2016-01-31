@@ -312,6 +312,17 @@ rpc_result_t *ArduRPC::getRawResult()
 }
 
 /**
+ * Return the length of request parameters in bytes
+ *
+ * @return Parameter length
+ */
+uint8_t ArduRPC::getRequestParamLength()
+{
+  // The size of the header is 4 bytes
+  return this->data.length - 4;
+}
+
+/**
  * Return a pointer to the result data
  * @return A pointer to the result data
  */

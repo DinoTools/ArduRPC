@@ -204,6 +204,7 @@ class ArduRPC
       readResult(),
       *getResultData(),
       copyData(uint8_t *src, uint8_t len),
+      getRequestParamLength(),
       getResultLength(),
       getResultDataLength();
     void

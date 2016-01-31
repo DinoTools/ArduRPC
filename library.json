@@ -2,7 +2,7 @@
   "name": "ArduRPC",
   "keywords": "rpc",
   "description": "ArduRPC brings remote procedure calls to microcontrollers. The protocol has been designed to be simple and flexible.",
-  "version": "0.4",
+  "version": "0.5.0",
   "repository":
   {
     "type": "git",

@@ -1,0 +1,16 @@
+{
+  "name": "ArduRPC",
+  "keywords": "rpc",
+  "description": "ArduRPC brings remote procedure calls to microcontrollers. The protocol has been designed to be simple and flexible.",
+  "version": "0.4",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/DinoTools/ArduRPC.git"
+  },
+  "frameworks": "arduino",
+  "platforms": [
+    "atmelavr",
+    "espressif"
+  ]
+}

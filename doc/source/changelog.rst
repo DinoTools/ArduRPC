@@ -1,6 +1,23 @@
 Changelog
 =========
 
+Version 0.5.0 (31.01.2016)
+--------------------------
+
+Lib:
+
+* Remove debug print()
+* Add uint32 and int32 result values
+* Add uint32 and int32 parameter values
+* Connect handler by ID
+* Send RPC requests
+* Change structure to comply with the Arduino 1.5 library
+
+Docs:
+
+* Add missing return codes
+
+
 Version 0.4.0 (02.08.2014)
 --------------------------
 

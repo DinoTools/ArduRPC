@@ -1,6 +1,6 @@
 /**
  * Arduino Remote Procedure Calls - ArduRPC
- * Copyright (C) 2013-2015 DinoTools
+ * Copyright (C) 2013-2016 DinoTools
  *
  * This file is part of ArduRPC.
  *
